@@ -1,0 +1,104 @@
+.site-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: #000;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    border-bottom: 1px solid #111;
+}
+
+.site-nav .logo {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.site-nav .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-nav .nav-links a {
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color .2s ease;
+}
+
+.site-nav .nav-links a:hover { color: var(--gold, #C4A484); }
+
+.site-nav .tracker-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid var(--gold, #C4A484);
+    border-radius: 4px;
+    background: rgba(196, 164, 132, .05);
+    color: var(--gold, #C4A484) !important;
+}
+
+.site-nav .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00c878;
+}
+
+.site-nav .nav-avatar {
+    display: flex;
+    width: 35px;
+    height: 35px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--gold, #C4A484);
+    color: #000;
+    font-size: .85rem;
+    font-weight: 900;
+}
+
+.site-nav .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.site-nav .bar { width: 25px; height: 2px; background: #fff; transition: transform .2s ease, opacity .2s ease; }
+
+@media (max-width: 992px) {
+    .site-nav .menu-toggle { display: flex; }
+    .site-nav .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: none;
+        width: 100%;
+        padding: 90px 20px 32px;
+        flex-direction: column;
+        gap: 22px;
+        background: rgba(0, 0, 0, .98);
+        border-bottom: 2px solid var(--gold, #C4A484);
+    }
+    .site-nav .nav-links.active { display: flex; }
+    .site-nav .nav-links a { font-size: 1rem; }
+    .site-nav .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+    .site-nav .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .site-nav .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}

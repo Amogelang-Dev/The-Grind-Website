@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Login - The Grind</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .login-section {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at center, rgba(196, 164, 132, 0.05) 0%, rgba(10, 10, 10, 0.95) 100%);
+        }
+
+        .login-card {
+            background: var(--gray-dark, #1A1A1A);
+            border: 1px solid var(--gray-medium, #222222);
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.4s ease;
+        }
+
+        .login-card:hover {
+            border-color: rgba(196, 164, 132, 0.3);
+        }
+
+        .login-card h2 {
+            font-size: 2rem;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .login-card p.subtitle {
+            color: #888;
+            font-size: 0.75rem;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--gold, #C4A484);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            color: #555;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            background: #0d0d0d;
+            border: 1px solid #252525;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--gold, #C4A484);
+            background: #121212;
+            box-shadow: 0 0 10px rgba(196, 164, 132, 0.15);
+        }
+
+        .form-group input:focus + i {
+            color: var(--gold, #C4A484);
+        }
+
+        .error-msg {
+            color: #ff4444;
+            background: rgba(255, 68, 68, 0.08);
+            padding: 12px;
+            font-size: 0.75rem;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 68, 68, 0.2);
+            display: none;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold, #C4A484);
+            color: #000;
+            border: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background: #d4b494;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 164, 132, 0.25);
+        }
+
+        .login-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            font-size: 0.75rem;
+            color: #777;
+        }
+
+        .login-footer a {
+            color: var(--gold, #C4A484);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .login-footer a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+    <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="login-section">
+        <div class="login-card">
+            <h2 class="gold-text">Member Demo</h2>
+            <p class="subtitle">Sign in to this browser's demo profile</p>
+
+            <div id="error-msg" class="error-msg">No demo profile was found for this email.</div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" placeholder="name@domain.com" required>
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login">Continue</button>
+            </form>
+
+            <p style="color: #777; font-size: .72rem; margin-top: 16px;">Demo profiles are stored in this browser only. This is not secure account authentication.</p>
+
+            <div class="login-footer">
+                Don't have an account yet? <a href="register.html">Register Here</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Form Submit Logic
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            let profiles = [];
+            try {
+                const storedProfiles = JSON.parse(localStorage.getItem('users') || '[]');
+                if (Array.isArray(storedProfiles)) profiles = storedProfiles;
+            } catch (error) {
+                profiles = [];
+            }
+            profiles = profiles.map(({ password, ...profile }) => profile);
+            localStorage.setItem('users', JSON.stringify(profiles));
+            const profile = profiles.find(user => user.email?.toLowerCase() === email.toLowerCase());
+            if (!profile) {
+                document.getElementById('error-msg').style.display = 'block';
+                return;
+            }
+            localStorage.setItem('user_session', JSON.stringify({
+                user_id: profile.id || profile.email,
+                user_name: profile.fullName || profile.user_name || 'Member',
+                user_email: profile.email,
+                user_loyalty: Number(profile.user_loyalty) || 0
+            }));
+            window.location.href = 'profile.html';
+        });
+    </script>
+    <script src="nav.js"></script>
+</body>
+</html>
